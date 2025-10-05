@@ -3,43 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎮 Arcade Empire Tycoon</title>
+    <title>🎮 Empire Tycoon</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"></script>
+    <script>
+        // Redirect to home page if not coming from there
+        if (!sessionStorage.getItem('fromHome')) {
+            window.location.href = 'home.html';
+        }
+        sessionStorage.removeItem('fromHome');
+    </script>
 </head>
 <body>
-    <audio id="background-music" loop>
-        <source src="Neon Dreams copy.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="menu-music" loop>
-        <source src="Pixel Dreams.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="explode-sound">
-        <source src="exploding-building-1-185114.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="coin-sound">
-        <source src="drop-coin-384921.mp3" type="audio/mpeg">
-    </audio>
-
-    <!-- Home Screen -->
-    <div id="home-screen">
-        <div class="home-content">
-            <h1 class="home-title">🎮 ARCADE EMPIRE 🎮</h1>
-            <p class="home-subtitle">Build Your Dream Arcade</p>
-            <div class="home-buttons">
-                <button id="new-game-btn" class="home-btn">🆕 New Game</button>
-                <button id="load-btn" class="home-btn">💾 Load Game</button>
-            </div>
-            <div id="save-slots" class="save-slots" style="display: none;"></div>
-        </div>
-    </div>
-
-    <div id="game-container" style="display: none;">
+    <div id="game-container">
         <div id="ui-panel">
             <div class="ui-header">
-                <h1>🎮 Arcade Empire</h1>
-                <button id="music-toggle" style="position: absolute; top: 10px; right: 120px; background: #e94560; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 16px;">🔊 Music</button>
-                <button id="change-music" style="position: absolute; top: 10px; right: 10px; background: #667eea; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 16px;">🎵 Track</button>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h1>🎮 Empire Tycoon</h1>
+                    <button id="music-toggle" style="background: rgba(255,255,255,0.2); border: 2px solid #ffd700; color: white; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 20px;">🔊</button>
+                </div>
                 <div class="stats">
                     <div class="stat-item rank-display">
                         <span class="icon">🏆</span>
@@ -65,25 +47,31 @@
                         <span class="icon">⭐</span>
                         <span id="fame">0</span>
                     </div>
-                    <div class="stat-item popularity-bar">
-                        <span class="icon">📊</span>
-                        Popularity: <span id="popularity">100</span>%
-                    </div>
-                    <div class="stat-item status-bar">
-                        <span class="icon">🧹</span>
-                        Cleanliness: <span id="cleanliness">100</span>%
+                    <div class="stat-item">
+                        <span class="icon">👥</span>
+                        Customers: <span id="customers">0</span>
                     </div>
                 </div>
             </div>
 
             <div class="action-buttons">
                 <button id="hire-staff-btn" class="action-btn">👥 Hire Staff</button>
-                <button id="invest-btn" class="action-btn">💎 Invest</button>
+                <button id="invest-btn" class="action-btn">💰 Invest</button>
             </div>
 
             <div class="action-buttons">
-                <button id="save-game-btn" class="action-btn">💾 Save</button>
-                <button id="menu-btn" class="action-btn">🏠 Menu</button>
+                <button id="instructions-btn" class="action-btn">📖 Instructions</button>
+                <button id="ranks-btn" class="action-btn">🏆 Ranks</button>
+            </div>
+
+            <div class="action-buttons">
+                <button id="save-btn" class="action-btn">💾 Save</button>
+                <button id="load-btn" class="action-btn">📂 Load</button>
+            </div>
+
+            <div class="action-buttons">
+                <button id="export-btn" class="action-btn">📤 Export</button>
+                <button id="home-btn" class="action-btn">🏠 Home</button>
             </div>
 
             <div class="shop-section">
@@ -92,7 +80,7 @@
             </div>
 
             <div class="info-section">
-                <div id="info-text">Click to place arcade machines!</div>
+                <div id="info-text">Click to place machines!</div>
             </div>
         </div>
         <div id="phaser-game"></div>
