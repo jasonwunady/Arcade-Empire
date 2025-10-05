@@ -1,0 +1,326 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background: #1a1a2e;
+    color: #eee;
+    overflow: hidden;
+}
+
+#game-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+#ui-panel {
+    width: 320px;
+    background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+    border-right: 4px solid #e94560;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    box-shadow: 4px 0 20px rgba(233, 69, 96, 0.3);
+}
+
+.ui-header {
+    background: #e94560;
+    padding: 20px;
+    border-bottom: 3px solid #fff;
+}
+
+.ui-header h1 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.stats {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stat-item .icon {
+    font-size: 24px;
+}
+
+.shop-section {
+    padding: 20px;
+    flex: 1;
+}
+
+.shop-section h2 {
+    color: #ffd700;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+#machine-shop {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.machine-card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid #e94560;
+    border-radius: 10px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.machine-card:hover {
+    background: rgba(233, 69, 96, 0.3);
+    transform: translateX(5px);
+    border-color: #ffd700;
+}
+
+.machine-card.locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: #666;
+}
+
+.machine-card.locked:hover {
+    transform: none;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.machine-card.selected {
+    background: rgba(255, 215, 0, 0.3);
+    border-color: #ffd700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.machine-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.machine-stats {
+    font-size: 12px;
+    color: #aaa;
+    margin-bottom: 5px;
+}
+
+.machine-cost {
+    color: #4ecca3;
+    font-weight: bold;
+}
+
+.action-buttons {
+    padding: 15px 20px;
+    display: flex;
+    gap: 10px;
+    border-bottom: 2px solid #e94560;
+}
+
+.action-btn {
+    flex: 1;
+    background: linear-gradient(135deg, #e94560 0%, #c44569 100%);
+    border: 2px solid #ffd700;
+    color: white;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Courier New', monospace;
+}
+
+.action-btn:hover {
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    color: #16213e;
+    transform: scale(1.05);
+}
+
+.action-btn:active {
+    transform: scale(0.95);
+}
+
+.rank-display {
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%) !important;
+    color: #16213e !important;
+    font-weight: bold;
+}
+
+.status-bar {
+    background: linear-gradient(135deg, #4ecca3 0%, #2ecc71 100%) !important;
+}
+
+.popularity-bar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+.info-section {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border-top: 2px solid #e94560;
+}
+
+#info-text {
+    font-size: 14px;
+    text-align: center;
+    color: #ffd700;
+}
+
+#phaser-game {
+    flex: 1;
+    background: #2d2d44;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Scrollbar styling */
+#ui-panel::-webkit-scrollbar {
+    width: 8px;
+}
+
+#ui-panel::-webkit-scrollbar-track {
+    background: #0f3460;
+}
+
+#ui-panel::-webkit-scrollbar-thumb {
+    background: #e94560;
+    border-radius: 4px;
+}
+
+#ui-panel::-webkit-scrollbar-thumb:hover {
+    background: #ffd700;
+}
+
+/* Home Screen */
+#home-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #0f3460 0%, #16213e 50%, #1a1a2e 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.home-content {
+    text-align: center;
+    padding: 40px;
+    background: rgba(233, 69, 96, 0.1);
+    border: 4px solid #e94560;
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(233, 69, 96, 0.5);
+    animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 40px rgba(233, 69, 96, 0.5); }
+    50% { box-shadow: 0 0 60px rgba(255, 215, 0, 0.6); }
+}
+
+.home-title {
+    font-size: 48px;
+    margin-bottom: 10px;
+    color: #ffd700;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(233, 69, 96, 0.5);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.home-subtitle {
+    font-size: 20px;
+    color: #4ecca3;
+    margin-bottom: 40px;
+    text-shadow: 0 0 10px rgba(78, 204, 163, 0.5);
+}
+
+.home-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    min-width: 300px;
+}
+
+.home-btn {
+    background: linear-gradient(135deg, #e94560 0%, #c44569 100%);
+    border: 3px solid #ffd700;
+    color: white;
+    padding: 15px 30px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Courier New', monospace;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.home-btn:hover {
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    color: #16213e;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+}
+
+.home-btn:active {
+    transform: scale(0.95);
+}
+
+.save-slots {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.save-slot {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid #4ecca3;
+    border-radius: 10px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: left;
+}
+
+.save-slot:hover {
+    background: rgba(78, 204, 163, 0.3);
+    border-color: #ffd700;
+    transform: translateX(5px);
+}
+
+.save-slot-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffd700;
+    margin-bottom: 5px;
+}
+
+.save-slot-info {
+    font-size: 12px;
+    color: #aaa;
+}

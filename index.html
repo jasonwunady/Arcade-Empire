@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Arcade Empire Tycoon</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"></script>
+</head>
+<body>
+    <audio id="background-music" loop>
+        <source src="Neon Dreams copy.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="menu-music" loop>
+        <source src="Pixel Dreams.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="explode-sound">
+        <source src="exploding-building-1-185114.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="coin-sound">
+        <source src="drop-coin-384921.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Home Screen -->
+    <div id="home-screen">
+        <div class="home-content">
+            <h1 class="home-title">🎮 ARCADE EMPIRE 🎮</h1>
+            <p class="home-subtitle">Build Your Dream Arcade</p>
+            <div class="home-buttons">
+                <button id="new-game-btn" class="home-btn">🆕 New Game</button>
+                <button id="load-btn" class="home-btn">💾 Load Game</button>
+            </div>
+            <div id="save-slots" class="save-slots" style="display: none;"></div>
+        </div>
+    </div>
+
+    <div id="game-container" style="display: none;">
+        <div id="ui-panel">
+            <div class="ui-header">
+                <h1>🎮 Arcade Empire</h1>
+                <button id="music-toggle" style="position: absolute; top: 10px; right: 120px; background: #e94560; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 16px;">🔊 Music</button>
+                <button id="change-music" style="position: absolute; top: 10px; right: 10px; background: #667eea; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 16px;">🎵 Track</button>
+                <div class="stats">
+                    <div class="stat-item rank-display">
+                        <span class="icon">🏆</span>
+                        <span id="rank">Rookie</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="icon">📅</span>
+                        Day <span id="day">1</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="icon">💰</span>
+                        <span id="money">250</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="icon">📈</span>
+                        <span id="income">0</span>/sec
+                    </div>
+                    <div class="stat-item">
+                        <span class="icon">🔧</span>
+                        <span id="maintenance">0</span>/day
+                    </div>
+                    <div class="stat-item">
+                        <span class="icon">⭐</span>
+                        <span id="fame">0</span>
+                    </div>
+                    <div class="stat-item popularity-bar">
+                        <span class="icon">📊</span>
+                        Popularity: <span id="popularity">100</span>%
+                    </div>
+                    <div class="stat-item status-bar">
+                        <span class="icon">🧹</span>
+                        Cleanliness: <span id="cleanliness">100</span>%
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button id="hire-staff-btn" class="action-btn">👥 Hire Staff</button>
+                <button id="invest-btn" class="action-btn">💎 Invest</button>
+            </div>
+
+            <div class="action-buttons">
+                <button id="save-game-btn" class="action-btn">💾 Save</button>
+                <button id="menu-btn" class="action-btn">🏠 Menu</button>
+            </div>
+
+            <div class="shop-section">
+                <h2>🎰 Machine Shop</h2>
+                <div id="machine-shop"></div>
+            </div>
+
+            <div class="info-section">
+                <div id="info-text">Click to place arcade machines!</div>
+            </div>
+        </div>
+        <div id="phaser-game"></div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
