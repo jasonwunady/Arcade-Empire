@@ -471,36 +471,9 @@ function update(time, delta) {
             const nextX = customer.sprite.x + (dx / distance) * speed;
             const nextY = customer.sprite.y + (dy / distance) * speed;
 
-            // Check collision with machines (except target machine)
-            let canMove = true;
-            for (let machine of gameState.placedMachines) {
-                if (machine.x === customer.targetX && machine.y === customer.targetY) continue; // Skip target
-
-                // Restaurant is 240x240 (3x3 grid), others are 80x80
-                const machineRadius = machine.type === 'restaurant' ? 120 : 40;
-                const customerSize = 15;
-                const minDist = machineRadius + customerSize;
-
-                const distToMachine = Math.sqrt(
-                    Math.pow(nextX - machine.x, 2) +
-                    Math.pow(nextY - machine.y, 2)
-                );
-
-                if (distToMachine < minDist) {
-                    canMove = false;
-                    // Try to move around the obstacle
-                    const angle = Math.atan2(machine.y - nextY, machine.x - nextX);
-                    customer.sprite.x -= Math.cos(angle) * 1;
-                    customer.sprite.y -= Math.sin(angle) * 1;
-                    break;
-                }
-            }
-
-            // Move if path is clear
-            if (canMove) {
-                customer.sprite.x = nextX;
-                customer.sprite.y = nextY;
-            }
+            // Move directly without collision checking
+            customer.sprite.x = nextX;
+            customer.sprite.y = nextY;
         }
 
         // Remove if off screen
