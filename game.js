@@ -201,7 +201,7 @@ const upgrades = [
         baseCost: 10000,
         costMultiplier: 2.5,
         owned: 0,
-        maxOwned: 2
+        maxOwned: 1
     },
     {
         id: 'expand_up',
@@ -210,7 +210,7 @@ const upgrades = [
         baseCost: 12000,
         costMultiplier: 2.8,
         owned: 0,
-        maxOwned: 2
+        maxOwned: 1
     },
     {
         id: 'income_boost',
